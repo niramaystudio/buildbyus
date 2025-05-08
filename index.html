@@ -152,20 +152,25 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      fetch("https://niramaystudio.github.io/buildbyus/verify.php")
-        .then(response => response.json())
-        .then(data => {
-          const backButton = document.querySelector(".back-button");
-          if (data.showBackButton) {
-            backButton.style.display = "block";
-            backButton.onclick = () => {
-              window.location.href = data.customUrl;
-            };
-          } else {
-            backButton.style.display = "none";
-          }
-        })
-        .catch(error => console.error("Error fetching verification data:", error));
+      const allowedReferrers = {-php-hosting.com/verify.php") // Replace with the hosted PHP URL
+        "https://aspkinternationaltrade.com/niramaystudio/": "https://custom-url-1.com",
+        "https://niramaystudio.aspkinternationaltrade.com/": "https://custom-url-2.com",
+        "https://madebyniramaystudio.blogspot.com/": "https://custom-url-3.com",
+        "https://another-allowed-url.com/": "https://custom-url-4.com"
+      };
+
+      const referrer = document.referrer;
+      const customUrl = allowedReferrers[referrer];
+
+      const backButton = document.querySelector(".back-button");
+      if (customUrl) {
+        backButton.style.display = "block";
+        backButton.onclick = () => {
+          window.location.href = customUrl;
+        };
+      } else {
+        backButton.style.display = "none";
+      }
     });
   </script>
 
