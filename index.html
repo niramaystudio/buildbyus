@@ -124,8 +124,52 @@
     .credit:hover {
       opacity: 1;
     }
+
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: linear-gradient(45deg, #ff5722, #ff9800);
+      color: #fff;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(255, 87, 34, 0.4);
+      transition: all 0.3s ease;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      z-index: 1000; /* Ensure the button is on top */
+    }
+
+    .back-button:hover {
+      background: linear-gradient(45deg, #ff9800, #ff5722);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(255, 87, 34, 0.6);
+    }
   </style>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("verify.php")
+        .then(response => response.json())
+        .then(data => {
+          const backButton = document.querySelector(".back-button");
+          if (data.showBackButton) {
+            backButton.style.display = "block";
+            backButton.onclick = () => {
+              window.location.href = data.customUrl;
+            };
+          } else {
+            backButton.style.display = "none";
+          }
+        })
+        .catch(error => console.error("Error fetching verification data:", error));
+    });
+  </script>
+
+  <button class="back-button" style="display: none;">Back</button>
     
   <div class="container">
     <!-- Replace 'fav.png' with your logo path or base64 image -->
