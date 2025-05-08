@@ -152,7 +152,7 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      fetch("verify.php")
+      fetch("/verify.php")
         .then(response => response.json())
         .then(data => {
           const backButton = document.querySelector(".back-button");
